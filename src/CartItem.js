@@ -1,35 +1,20 @@
 import React from 'react';
 
 
-class Cart extends React.Component{
 
-    // states in React = "its a javascript object"
+class Cart extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            price : 999,
-            title : "phone",
-            Qty : 2,
-            img : ""
-        }
-    }
-
-    increaseQuantity =  () => 
-        
- {
-    this.setState({Qty : this.state.Qty+1});
- }
-   decreaseQuantity = () => {
-    this.setState({Qty: this.state.Qty -1});
-   } 
-
-
-
-   // returns the React element
     render () {
 
+        const {Qty = 5,price,title,img} = this.props.product;
+
+        
+  
+
         return (
+
+
+          
             <div className='cart-item'>
                 <div className='left-block'>
 
@@ -38,21 +23,21 @@ class Cart extends React.Component{
                 </div>
                 <div className='right-block'>
 
-                    <div style={ {fontSize:25} }>{this.state.title}</div>
-                    <div style={ {color : '#777'} }>Price {this.state.price}</div>
-                    <div style={ {color : '#777'} }>Quantity {this.state.Qty}</div>
+                    <div style={ {fontSize:25} }> Title {title}</div>
+                    <div style={ {color : '#777'} }>Price {price}</div>
+                    <div style={ {color : '#777'} }>Quantity {Qty}</div>
                     <div className='cart-item-actions'>
                         {/*Buttons*/}
                         <img 
                         alt = "increase" 
                         src = "https://cdn-icons-png.flaticon.com/512/3524/3524388.png" 
                         className='action-icons' 
-                        onClick={this.increaseQuantity}/>
+                        onClick={() => this.props.onIncreaseQuantity(this.props.product)}/>
                         <img 
                         alt = "decrease" 
                         src = "https://cdn-icons-png.flaticon.com/512/2569/2569198.png" 
                         className='action-icons' 
-                        onClick = {this.decreaseQuantity}/>
+                        onClick = {() => this.props.onDecreasingQuantity(this.props.product)}/>
                         <img 
                         alt = "delete" 
                         src = "https://cdn-icons-png.flaticon.com/512/6861/6861362.png" 
@@ -67,7 +52,6 @@ class Cart extends React.Component{
 
     }
 
-
 }
 
 const style = {
@@ -78,6 +62,7 @@ const style = {
         backgroundColor : '#777'
     }
 }
+
 
 
 export default Cart;
