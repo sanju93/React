@@ -4,97 +4,34 @@ import Cart from './CartItem';
 
 
 
-class CartItem extends React.Component{
 
+  const CartItem = (props) => {
 
     
-    constructor() {
-        super();
-        this.state = {
-            products : [
-             {
-                price : 20000,
-                title : "phone",
-                Qty : 2,
-                img : "",
-                id  : 1
-            },
-            {
-                price : 999,
-                title : "Watch",
-                Qty : 2,
-                img : "",
-                id : 2
-            }, 
-            {
-                price : 70000,
-                title : "Laptop",
-                Qty : 2,
-                img : "",
-                id : 3
-            }
-        ]
-    }
-
    
-        
-    }
-    increaseQuantity = (product) => {
-        
-      const{products} = this.state;
-      const index = products.indexOf(product);
-    products[index].Qty += 1;
-    this.setState({products : products});
-
-        
-    }
-
-    decreasingQuantity = (product) => {
-
-        
-
-       const {products} = this.state;
-       const index = products.indexOf(product);
-
-       if (products[index].Qty === 0){
-            return;
-       }
-       products[index].Qty -= 1;
-       this.setState({products : products});
-
-    }
-
-    deleteProduct = (id) => {
-        const {products} = this.state;
-        const items = products.filter((item) => item.id != id);
-        // console.log(items);
-
-        this.setState({products : items});
-
-
-    }
    
 
-    render () {
-        const {products} = this.state;
+    
+        const {products} = props;
         return (
             <div className='cart'>
                 
                 {
                     products.map((products) => {
                         return <Cart 
-                        product = {products}  
-                        onIncreaseQuantity = {this.increaseQuantity} 
-                        onDecreasingQuantity = {this.decreasingQuantity}
-                        onDeleteProduct = {this.deleteProduct} 
-                        key = {products.id}/>
+                        products = {products}  
+                        onIncreaseQuantity = {props.onIncreaseQuantity} 
+                        onDecreasingQuantity = {props.onDecreasingQuantity}
+                        onDeleteProduct = {props.onDeleteProduct} 
+                        key = {products.id}
+                        />
                     })
                 }
               
           
             </div>
         );
-    }
+    
 
    
 
